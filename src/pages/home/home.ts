@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 
 declare var Paho: any;
 
@@ -10,9 +10,9 @@ declare var Paho: any;
 
 export class HomePage {
 	private currentRoom: any = "Wellington Hospital";
-	private timeInactive: any = 2;
+	private timeInactive: any = 0;
 	private lastActive = new Date();
-
+	private timerGone: any = false;
 	private mqttStatus: string = 'Disconnected';
 	private mqttClient: any = null;
 	private message: any = '';
@@ -20,7 +20,7 @@ export class HomePage {
 	private topic: string = 'swen325/a3';
 	private clientId: string = 'yourName'
 
-	constructor(public navCtrl: NavController) {
+	constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
 
 	}
 
@@ -81,13 +81,15 @@ export class HomePage {
 
 	parseMessage() {
 		var result = this.message.split(",");
-		
+
 		console.log("message = " + this.message);
 		//currentActivity = 'squatting';
 		console.log("room = " + this.currentRoom);
 		console.log("result = " + result[1]);
 
 		if (result[2] == 1) {
+			this.timerGone = false;
+
 			this.lastActive = new Date();
 			this.currentRoom = result[1];
 
@@ -98,9 +100,21 @@ export class HomePage {
 		this.timeInactive = this.timeInactive / 1000;
 		this.timeInactive = this.timeInactive / 60;
 		this.timeInactive = Math.round(this.timeInactive);
-
+		if (this.timeInactive >= 2 && !this.timerGone) {
+			this.presentAlert();
+			this.timerGone = true;
+		}
 		console.log("updatedroom = " + this.currentRoom);
 
+	}
+
+	presentAlert() {
+		let alert = this.alertCtrl.create({
+			title: 'Inactivity Warning',
+			subTitle: 'Old person has been inactive for 2 minutes',
+			buttons: ['Dismiss']
+		});
+		alert.present();
 	}
 }
 
