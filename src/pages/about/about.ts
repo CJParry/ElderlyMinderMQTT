@@ -7,8 +7,8 @@ import { NavController } from 'ionic-angular';
 })
 export class AboutPage {
 // Doughnut
-public doughnutChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-public doughnutChartData:number[] = [350, 450, 100];
+public doughnutChartLabels:string[] = ['Living', 'Kitchen', 'Dining', 'Bedroom', 'Toilet'];
+public doughnutChartData:number[] = [350, 450, 100, 33, 500];
 public doughnutChartType:string = 'doughnut';
 
   constructor(public navCtrl: NavController) {
