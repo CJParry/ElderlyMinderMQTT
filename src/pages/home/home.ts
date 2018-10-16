@@ -10,7 +10,7 @@ declare var Paho: any;
 })
 
 export class HomePage {
-	private currentRoom: any = "Wellington Hospital";
+	private currentRoom: any = "?";
 	private timeInactive: any = 0;
 	private lastActive = new Date();
 	private timerGone: any = false;
@@ -19,10 +19,9 @@ export class HomePage {
 	private message: any = '';
 	private messageToSend: string = 'Your message';
 	private topic: string = 'swen325/a3';
-	private clientId: string = 'yourName'
+	private clientId: string = 'CJ_La_Fray'
 
 	constructor(public navCtrl: NavController, private alertCtrl: AlertController, private messagesProvider: MessagesProvider) {
-		this.connect();
 	}
 
 	public connect = () => {

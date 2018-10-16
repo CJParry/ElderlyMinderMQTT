@@ -8,6 +8,10 @@ import { MessagesProvider } from '../../providers/messages/messages';
 })
 
 export class ContactPage {
+
+  ionViewWillEnter(){
+this.update();    }
+
   public barChartData: any[] = [];
   constructor(public navCtrl: NavController, public messagesProvider: MessagesProvider) {
     this.barChartData = messagesProvider.getVoltages();
@@ -17,7 +21,7 @@ export class ContactPage {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  public barChartLabels: string[] = ['Living', 'Kitchen', 'Dining', 'Bedroom', 'Toilet'];
+  public barChartLabels: string[] = ['Living', 'Kitchen', 'Dining', 'Toilet', 'Bedroom'];
   public barChartType: string = 'bar';
   public barChartLegend: boolean = true;
 
@@ -35,7 +39,8 @@ export class ContactPage {
   }
 
   public update(): void {
-
+    this.barChartData = this.messagesProvider.getVoltages();
+console.log("in update");
 
   }
 }
