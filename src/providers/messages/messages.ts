@@ -19,4 +19,15 @@ export class MessagesProvider {
 
   }
 
+  getMovements(){
+    return [4];
+  }
+
+  getVoltages(){
+    let barChartData = [
+      { data: [28, 48, 40, 19, 86], label: 'Voltage' }
+    ];
+
+    return barChartData;
+  }
 }
