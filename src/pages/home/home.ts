@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
+import { MessagesProvider } from '../../providers/messages/messages';
 
 declare var Paho: any;
 
@@ -20,8 +21,8 @@ export class HomePage {
 	private topic: string = 'swen325/a3';
 	private clientId: string = 'yourName'
 
-	constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
-
+	constructor(public navCtrl: NavController, private alertCtrl: AlertController, private messagesProvider: MessagesProvider) {
+		this.connect();
 	}
 
 	public connect = () => {
@@ -81,7 +82,7 @@ export class HomePage {
 
 	parseMessage() {
 		var result = this.message.split(",");
-
+		this.messagesProvider.add(this.message);
 		console.log("message = " + this.message);
 		//currentActivity = 'squatting';
 		console.log("room = " + this.currentRoom);
