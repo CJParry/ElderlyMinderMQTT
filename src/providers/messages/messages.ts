@@ -11,6 +11,8 @@ import { Injectable } from '@angular/core';
 export class MessagesProvider {
   messages: any = [];
   timestamps: any = [];
+   pieChartData:number[] = [350, 450, 100, 33, 500];
+
   batteryStatus: any =  {living:0, kitchen:2, dining:3, toilet:2, bedroom:1};
   motionStatus: any = [];
 
@@ -19,33 +21,44 @@ export class MessagesProvider {
 
   parseMessage(message) {
     var result = message.split(",");
-console.log("result[1] = " +result[1]);
+//console.log("result[1] = " +result[1]);
     if (result[1] == "living") {
-      this.batteryStatus.living = result[3];      
+      this.batteryStatus.living = result[3];   
+            this.pieChartData[0]+=parseInt(result[2]);   
     } else if (result[1] == "kitchen") {
       this.batteryStatus.kitchen = result[3];
+            this.pieChartData[1]+=result[2];   
+
     } else if (result[1] == "dining") {
       this.batteryStatus.dining = result[3];
+                  this.pieChartData[2]+=result[2];   
+
     } else if (result[1] == "toilet") {
       this.batteryStatus.toilet = result[3];
+                  this.pieChartData[3]+=result[2];   
+
     } else if (result[1] == "bedroom") {
       this.batteryStatus.bedroom = result[3];
+                  this.pieChartData[4]+=result[2];   
+
     }
+
+  }
+
+  parseBattery(){
 
   }
 
 //1,living,1,1
   add(message) {
-    console.log("message in provider= " + message);
     //this.messages.add(message);
-    console.log("messages ="+this.messages);
     this.parseMessage(message);
 
   }
 
   getMovements() {
 
-    return this.messages;
+    return this.pieChartData;
   }
 
   getVoltages() {

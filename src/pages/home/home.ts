@@ -17,7 +17,7 @@ export class HomePage {
 	private mqttStatus: string = 'Disconnected';
 	private mqttClient: any = null;
 	private message: any = '';
-	private messageToSend: string = 'Your message';
+	private messageToSend: string = '1,living,1,9';
 	private topic: string = 'swen325/a3';
 	private clientId: string = 'CJ_La_Fray'
 
@@ -50,6 +50,8 @@ export class HomePage {
 	public sendMessage() {
 		if (this.mqttStatus == 'Connected') {
 			this.mqttClient.publish(this.topic, this.messageToSend);
+		}else{
+			this.parseMessage(this.messageToSend);
 		}
 	}
 
@@ -79,14 +81,15 @@ export class HomePage {
 
 	}
 
-	parseMessage() {
-		var result = this.message.split(",");
-		this.messagesProvider.add(this.message);
-		console.log("message = " + this.message);
-		//currentActivity = 'squatting';
-		console.log("room = " + this.currentRoom);
-		console.log("result = " + result[1]);
+	parseMessage(m) {
+		console.log(m);
+		//var result = this.message.split(",");
+		var result = m.split(",");
+		
+	//	this.messagesProvider.add(this.message);
+		this.messagesProvider.add(m);
 
+		//currentActivity = 'squatting';
 		if (result[2] == 1) {
 			this.timerGone = false;
 
@@ -104,7 +107,6 @@ export class HomePage {
 			this.presentAlert();
 			this.timerGone = true;
 		}
-		console.log("updatedroom = " + this.currentRoom);
 
 	}
 
