@@ -77,7 +77,7 @@ export class HomePage {
 	public onMessageArrived = (message) => {
 		console.log('Received message');
 		this.message = message.payloadString;
-		this.parseMessage();
+		this.parseMessage(this.message);
 
 	}
 
@@ -85,7 +85,7 @@ export class HomePage {
 		console.log(m);
 		//var result = this.message.split(",");
 		var result = m.split(",");
-		
+
 	//	this.messagesProvider.add(this.message);
 		this.messagesProvider.add(m);
 
