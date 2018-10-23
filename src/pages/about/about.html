@@ -9,6 +9,7 @@
 <ion-content padding>
 
  <div style="display: block">
+     <h1 align="center">Movements Detected By Room</h1><br>
     <canvas baseChart
                 [data]="pieChartData"
                 [labels]="pieChartLabels"
@@ -16,7 +17,8 @@
                 (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"
                 width = 300
-                height = 800></canvas>
+                height = 300
+    ></canvas>
   </div>
 
 </ion-content>

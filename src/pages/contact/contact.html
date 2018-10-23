@@ -7,8 +7,9 @@
 </ion-header>
 
 <ion-content>
+    <h1 align="center">Sensor Battery Voltages</h1>
    <div>
-    <div style="display: block">
+    <div style="display: block; color:white">
       <canvas baseChart
               [datasets]="barChartData"
               [labels]="barChartLabels"
@@ -16,7 +17,8 @@
               [legend]="barChartLegend"
               [chartType]="barChartType"
               (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
+              (chartClick)="chartClicked($event)"
+      height = 300></canvas>
     </div>
     <button (click)="update()">Update</button>
   </div>

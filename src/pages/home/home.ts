@@ -22,6 +22,7 @@ export class HomePage {
 	private clientId: string = 'CJ_La_Fray'
 
 	constructor(public navCtrl: NavController, private alertCtrl: AlertController, private messagesProvider: MessagesProvider) {
+		this.connect();
 	}
 
 	public connect = () => {
