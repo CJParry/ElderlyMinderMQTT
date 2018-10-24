@@ -12,7 +12,7 @@ export class AboutPage {
         this.update();    }
 
 // Doughnut
-    public pieChartLabels:string[] = ['Living', 'Kitchen', 'Dining', 'Bedroom', 'Toilet'];
+    public pieChartLabels:string[] = ['Living', 'Kitchen', 'Dining', 'Toilet', 'Bedroom'];
     public pieChartData:number[] = [350, 450, 100, 33, 500];
     public pieChartType:string = 'pie';
 

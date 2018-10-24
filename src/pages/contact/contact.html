@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content>
-    <h1 align="center">Sensor Battery Voltages</h1>
+    <h1 align="center">Battery Charge</h1>
    <div>
     <div style="display: block; color:white">
       <canvas baseChart
@@ -23,4 +23,5 @@
     </div>
     <button (click)="update()">Update</button>
   </div>
+    <h3>Lowest Battery:{{lowestBattery}}</h3>
 </ion-content>

@@ -11,7 +11,7 @@ declare var Paho: any;
 })
 
 export class HomePage {
-	private currentRoom: any = "?";
+	private currentRoom: any = "Bedroom";
 	private timeInactive: any = 0;
 	private lastActive = new Date();
 	private timerGone: any = false;
@@ -21,15 +21,6 @@ export class HomePage {
 	private messageToSend: string = '1,living,1,9';
 	private topic: string = 'swen325/a3';
 	private clientId: string = 'CJ_La_Fray'
-
-    ionViewWillEnter(){
-        this.update();    }
-
-// Doughnut
-    public pieChartLabels:string[] = ['Living', 'Kitchen', 'Dining', 'Bedroom', 'Toilet'];
-    public pieChartData:number[] = [350, 450, 100, 33, 500];
-    public pieChartType:string = 'pie';
-
 
 
     constructor(public navCtrl: NavController, private alertCtrl: AlertController, private messagesProvider: MessagesProvider) {
@@ -95,10 +86,8 @@ export class HomePage {
 
 	parseMessage(m) {
 		console.log(m);
-		//var result = this.message.split(",");
 		var result = m.split(",");
 
-	//	this.messagesProvider.add(this.message);
 		this.messagesProvider.add(m);
 
 		//currentActivity = 'squatting';
@@ -106,7 +95,7 @@ export class HomePage {
 			this.timerGone = false;
 
 			this.lastActive = new Date();
-			this.currentRoom = result[1];
+			this.currentRoom = this.capitalizeFirstLetter(result[1]);
 
 		}
 		let currentTime = new Date().getTime();
@@ -115,12 +104,17 @@ export class HomePage {
 		this.timeInactive = this.timeInactive / 1000;
 		this.timeInactive = this.timeInactive / 60;
 		this.timeInactive = Math.round(this.timeInactive);
+
 		if (this.timeInactive >= 2 && !this.timerGone) {
 			this.presentAlert();
 			this.timerGone = true;
 		}
 
 	}
+
+    capitalizeFirstLetter(string) {
+        return string[0].toUpperCase() + string.slice(1);
+    }
 
 	presentAlert() {
 		let alert = this.alertCtrl.create({
@@ -131,19 +125,6 @@ export class HomePage {
 		alert.present();
 	}
 
-    // events
-    public chartClicked(e:any):void {
-        console.log(e);
-    }
 
-    public chartHovered(e:any):void {
-        console.log(e);
-    }
-
-    public update(): void {
-        this.pieChartData = this.messagesProvider.getMovements();
-        console.log("in update");
-
-    }
 }
 

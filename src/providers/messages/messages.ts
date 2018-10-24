@@ -49,12 +49,12 @@ export class MessagesProvider {
 
     }
 
-//1,living,1,1
     add(message) {
-        //this.messages.add(message);
         this.parseMessage(message);
 
     }
+
+
 
     getMovements() {
 
@@ -65,7 +65,7 @@ export class MessagesProvider {
         console.log("living voltage = " + this.batteryStatus.living);
         let barChartData = [
             { data: [this.batteryStatus.living, this.batteryStatus.kitchen,
-                    this.batteryStatus.dining, this.batteryStatus.toilet, this.batteryStatus.bedroom], label: 'Voltage', backgroundColor: [
+                    this.batteryStatus.dining, this.batteryStatus.toilet, this.batteryStatus.bedroom], label: 'Percentage %', backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(255, 206, 86, 0.2)',
@@ -73,7 +73,6 @@ export class MessagesProvider {
                     'rgba(153, 102, 255, 0.2)',
                     'rgba(255, 159, 64, 0.2)'
                 ] },
-
         ];
 
         return barChartData;
