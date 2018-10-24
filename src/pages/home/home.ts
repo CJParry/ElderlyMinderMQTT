@@ -1,7 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { MessagesProvider } from '../../providers/messages/messages';
+import { ActivitiesProvider } from '../../providers/activities/activities';
+
 import { AboutPage } from "../about/about";
+
 
 declare var Paho: any;
 
@@ -12,6 +15,7 @@ declare var Paho: any;
 
 export class HomePage {
 	private currentRoom: any = "Bedroom";
+	private currentActivity: any = "Hiding";
 	private timeInactive: any = 0;
 	private lastActive = new Date();
 	private timerGone: any = false;
@@ -23,7 +27,7 @@ export class HomePage {
 	private clientId: string = 'CJ_La_Fray'
 
 
-    constructor(public navCtrl: NavController, private alertCtrl: AlertController, private messagesProvider: MessagesProvider) {
+    constructor(public navCtrl: NavController, private alertCtrl: AlertController, private messagesProvider: MessagesProvider, private activitiesProvider: ActivitiesProvider) {
 		this.connect();
 	}
 
@@ -96,6 +100,7 @@ export class HomePage {
 
 			this.lastActive = new Date();
 			this.currentRoom = this.capitalizeFirstLetter(result[1]);
+			this.currentActivity = this.activitiesProvider.getActivity();
 
 		}
 		let currentTime = new Date().getTime();

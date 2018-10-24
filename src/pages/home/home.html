@@ -8,18 +8,20 @@
 
 <ion-content padding align="center">
 
-  <ion-card>
     <ion-card-content>Status:
       <b>{{mqttStatus}}</b>
     </ion-card-content>
-  </ion-card>
 
 
-    <h1 ion-text >Last seen location:</h1>
+    <h1 ion-text >Last Known location:</h1>
     <h1 ion-text color="secondary">{{currentRoom}}</h1>
 
-    <h1 ion-text >Time inactive:</h1>
-    <h1 ion-text color="secondary">{{timeInactive}} min</h1>
+
+  <h1 ion-text >Last Known Activity:</h1>
+  <h1 ion-text color="secondary">{{currentActivity}}</h1>
+
+  <h1 ion-text >Time Inactive:</h1>
+  <h1 ion-text color="secondary">{{timeInactive}} min</h1>
 
   <!--<ion-label >Message to Send:</ion-label>-->
       <!--<ion-textarea [(ngModel)]='messageToSend'>{{this.messageToSend}}</ion-textarea>-->

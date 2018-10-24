@@ -12,8 +12,8 @@ export class MessagesProvider {
     messages: any = [];
     timestamps: any = [];
     pieChartData:number[] = [350, 450, 100, 33, 500];
-
-    batteryStatus: any =  {living:0, kitchen:2, dining:3, toilet:2, bedroom:1};
+    flatBatteries:any=[];
+    batteryStatus: any =  {living:67, kitchen:92, dining:53, toilet:42, bedroom:91};
     motionStatus: any = [];
 
     constructor() {
@@ -21,25 +21,40 @@ export class MessagesProvider {
 
     parseMessage(message) {
         var result = message.split(",");
-//console.log("result[1] = " +result[1]);
         if (result[1] == "living") {
+             this.flatBatteries=[];
+
             this.batteryStatus.living = result[3];
+            if(result[3]<15){
+                this.flatBatteries.push("Living - " + result[3] + "%")
+            }
             this.pieChartData[0]+=parseInt(result[2]);
         } else if (result[1] == "kitchen") {
             this.batteryStatus.kitchen = result[3];
             this.pieChartData[1]+=parseInt(result[2]);
-
+            if(result[3]<15){
+                this.flatBatteries.push("Kitchen - " + result[3]+ "%")
+            }
         } else if (result[1] == "dining") {
             this.batteryStatus.dining = result[3];
             this.pieChartData[2]+=parseInt(result[2]);
+            if(result[3]<15){
+                this.flatBatteries.push("Dining - " + result[3]+ "%")
+            }
 
         } else if (result[1] == "toilet") {
             this.batteryStatus.toilet = result[3];
             this.pieChartData[3]+=parseInt(result[2]);
+            if(result[3]<15){
+                this.flatBatteries.push("Toilet - " + result[3]+ "%")
+            }
 
         } else if (result[1] == "bedroom") {
             this.batteryStatus.bedroom = result[3];
             this.pieChartData[4]+=parseInt(result[2]);
+            if(result[3]<15){
+                this.flatBatteries.push("Bedroom - " + result[3]+ "%")
+            }
 
         }
 
@@ -49,6 +64,14 @@ export class MessagesProvider {
 
     }
 
+    resetBatteries(){
+        this.flatBatteries = [];
+    }
+
+    getFlatBatteries(){
+        console.log(("**$$$$$$$$$$$$$$$$$$    in getFlatBatMess" ))
+        return this.flatBatteries;
+    }
     add(message) {
         this.parseMessage(message);
 
@@ -57,7 +80,6 @@ export class MessagesProvider {
 
 
     getMovements() {
-
         return this.pieChartData;
     }
 
