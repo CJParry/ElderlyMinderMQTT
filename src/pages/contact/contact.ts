@@ -24,9 +24,22 @@ this.update();    }
   public barChartLabels: string[] = ['Living', 'Kitchen', 'Dining', 'Toilet', 'Bedroom'];
   public barChartType: string = 'bar';
   public barChartLegend: boolean = true;
+    public barChartColors: any [] =[
+        {
+            backgroundColor:'#0000ff',
+            borderColor: "rgba(10,150,132,1)",
+            borderWidth: 1
+        },
+        {
+            backgroundColor:'rgb(97 174 55, 1 )',
+            borderColor: "rgba(10,150,132,1)",
+            borderWidth: 5,
+        }
+    ]
 
   // public barChartData: any[] = [
-  //   { data: [28, 48, 40, 19, 86], label: 'Voltage' }
+  //   { data: [86] },
+  //     { data: [86] }
   // ];
 
   // events
@@ -39,8 +52,9 @@ this.update();    }
   }
 
   public update(): void {
+      setTimeout(() => {
+          this.update();
+      }, 1000);
     this.barChartData = this.messagesProvider.getVoltages();
-console.log("in update");
-
   }
 }

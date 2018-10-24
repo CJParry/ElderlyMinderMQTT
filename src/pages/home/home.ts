@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { MessagesProvider } from '../../providers/messages/messages';
+import { AboutPage } from "../about/about";
 
 declare var Paho: any;
 
@@ -21,7 +22,17 @@ export class HomePage {
 	private topic: string = 'swen325/a3';
 	private clientId: string = 'CJ_La_Fray'
 
-	constructor(public navCtrl: NavController, private alertCtrl: AlertController, private messagesProvider: MessagesProvider) {
+    ionViewWillEnter(){
+        this.update();    }
+
+// Doughnut
+    public pieChartLabels:string[] = ['Living', 'Kitchen', 'Dining', 'Bedroom', 'Toilet'];
+    public pieChartData:number[] = [350, 450, 100, 33, 500];
+    public pieChartType:string = 'pie';
+
+
+
+    constructor(public navCtrl: NavController, private alertCtrl: AlertController, private messagesProvider: MessagesProvider) {
 		this.connect();
 	}
 
@@ -119,5 +130,20 @@ export class HomePage {
 		});
 		alert.present();
 	}
+
+    // events
+    public chartClicked(e:any):void {
+        console.log(e);
+    }
+
+    public chartHovered(e:any):void {
+        console.log(e);
+    }
+
+    public update(): void {
+        this.pieChartData = this.messagesProvider.getMovements();
+        console.log("in update");
+
+    }
 }
 
