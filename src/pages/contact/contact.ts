@@ -9,10 +9,8 @@ import { MessagesProvider } from '../../providers/messages/messages';
 
 export class ContactPage {
     public batteriesToReplace:any;
-    ionViewWillEnter(){
-        this.update();    }
-
     public barChartData: any[] = [];
+
     constructor(public navCtrl: NavController, public messagesProvider: MessagesProvider) {
         this.barChartData = messagesProvider.getVoltages();
         this.batteriesToReplace = messagesProvider.getFlatBatteries();
@@ -63,6 +61,10 @@ export class ContactPage {
         }, 1000);
         this.barChartData = this.messagesProvider.getVoltages();
         this.batteriesToReplace=this.messagesProvider.getFlatBatteries();
-        console.log(("################" + this.batteriesToReplace))
     }
+
+    ionViewWillEnter(){
+        this.update();
+    }
+
 }

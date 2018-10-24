@@ -13,11 +13,10 @@ export class AboutPage {
 
 // Doughnut
     public pieChartLabels:string[] = ['Living', 'Kitchen', 'Dining', 'Toilet', 'Bedroom'];
-    public pieChartData:number[] = [350, 450, 100, 33, 500];
+    public pieChartData:number[] = [1, 1, 1, 1, 1];
     public pieChartType:string = 'pie';
 
     constructor(public navCtrl: NavController, public messagesProvider: MessagesProvider) {
-
     }
 
     // events
@@ -31,8 +30,6 @@ export class AboutPage {
 
     public update(): void {
         this.pieChartData = this.messagesProvider.getMovements();
-        console.log("in update");
-
     }
 }
 

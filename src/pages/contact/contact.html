@@ -6,21 +6,21 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content align="center">
+<ion-content padding align="center">
     <h1>Battery Charge</h1>
-        <div style="display: block; color:white">
-            <canvas baseChart
-                    [datasets]="barChartData"
-                    [labels]="barChartLabels"
-                    [colors]="barChartColors"
-                    [options]="barChartOptions"
-                    [legend]="barChartLegend"
-                    [chartType]="barChartType"
-                    (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"
-                    height = 300></canvas>
-        </div>
-    <h3>Batteries need replacing soon:</h3>
+    <div style="display: block; color:white">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [colors]="barChartColors"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"
+                height = 300></canvas>
+    </div>
+    <h3>Replace Batteries:</h3>
     <h4 ion-text color="secondary" *ngFor="let s of batteriesToReplace" >
         {{s}}
     </h4>

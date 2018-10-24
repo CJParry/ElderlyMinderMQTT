@@ -1,12 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-/*
-  Generated class for the MessagesProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class MessagesProvider {
     messages: any = [];
@@ -16,52 +10,45 @@ export class MessagesProvider {
     batteryStatus: any =  {living:67, kitchen:92, dining:53, toilet:42, bedroom:91};
     motionStatus: any = [];
 
-    constructor() {
-    }
-
     parseMessage(message) {
         var result = message.split(",");
         if (result[1] == "living") {
-             this.flatBatteries=[];
-
+            this.flatBatteries=[];
             this.batteryStatus.living = result[3];
+            this.pieChartData[0]+=parseInt(result[2]);
+
             if(result[3]<15){
                 this.flatBatteries.push("Living - " + result[3] + "%")
             }
-            this.pieChartData[0]+=parseInt(result[2]);
         } else if (result[1] == "kitchen") {
             this.batteryStatus.kitchen = result[3];
             this.pieChartData[1]+=parseInt(result[2]);
+
             if(result[3]<15){
                 this.flatBatteries.push("Kitchen - " + result[3]+ "%")
             }
         } else if (result[1] == "dining") {
             this.batteryStatus.dining = result[3];
             this.pieChartData[2]+=parseInt(result[2]);
+
             if(result[3]<15){
                 this.flatBatteries.push("Dining - " + result[3]+ "%")
             }
-
         } else if (result[1] == "toilet") {
             this.batteryStatus.toilet = result[3];
             this.pieChartData[3]+=parseInt(result[2]);
+
             if(result[3]<15){
                 this.flatBatteries.push("Toilet - " + result[3]+ "%")
             }
-
         } else if (result[1] == "bedroom") {
             this.batteryStatus.bedroom = result[3];
             this.pieChartData[4]+=parseInt(result[2]);
+
             if(result[3]<15){
                 this.flatBatteries.push("Bedroom - " + result[3]+ "%")
             }
-
         }
-
-    }
-
-    parseBattery(){
-
     }
 
     resetBatteries(){
@@ -69,22 +56,18 @@ export class MessagesProvider {
     }
 
     getFlatBatteries(){
-        console.log(("**$$$$$$$$$$$$$$$$$$    in getFlatBatMess" ))
         return this.flatBatteries;
     }
+
     add(message) {
         this.parseMessage(message);
-
     }
-
-
 
     getMovements() {
         return this.pieChartData;
     }
 
     getVoltages() {
-        console.log("living voltage = " + this.batteryStatus.living);
         let barChartData = [
             { data: [this.batteryStatus.living, this.batteryStatus.kitchen,
                     this.batteryStatus.dining, this.batteryStatus.toilet, this.batteryStatus.bedroom], label: 'Percentage %', backgroundColor: [
@@ -96,7 +79,6 @@ export class MessagesProvider {
                     'rgba(255, 159, 64, 0.2)'
                 ] },
         ];
-
         return barChartData;
     }
 }
