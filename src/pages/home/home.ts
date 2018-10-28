@@ -28,6 +28,7 @@ export class HomePage {
 
     constructor(public navCtrl: NavController, private alertCtrl: AlertController, private messagesProvider: MessagesProvider, private activitiesProvider: ActivitiesProvider) {
         this.connect();
+        this.checkForAlert();
     }
 
     public connect = () => {
@@ -97,7 +98,6 @@ export class HomePage {
             this.currentRoom = this.capitalizeFirstLetter(result[1]);
             this.currentActivity = this.activitiesProvider.getActivity();
         }
-        this.checkForAlert();
     }
 
     checkForAlert(){
@@ -109,23 +109,17 @@ export class HomePage {
         this.timeInactive = this.timeInactive / 60;
         this.timeInactive = Math.round(this.timeInactive);
 
-        if (this.timeInactive >= 2 && !this.timerGone) {
-            this.presentAlert();
+        if (this.timeInactive >= 5 && !this.timerGone) {
+            navigator.serviceWorker.controller.postMessage(null);
             this.timerGone = true;
         }
+   setTimeout(() => {
+            this.checkForAlert();
+        }, 1000);
     }
 
     capitalizeFirstLetter(string) {
         return string[0].toUpperCase() + string.slice(1);
-    }
-
-    presentAlert() {
-        let alert = this.alertCtrl.create({
-            title: 'Inactivity Warning',
-            subTitle: 'Old person has been inactive for 2 minutes',
-            buttons: ['Dismiss']
-        });
-        alert.present();
     }
 }
 
